@@ -10,10 +10,28 @@ import {
   ScrollView 
 } from 'react-native';
 
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  course: string;
+  price: number;
+}
+
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  dishName: string;
+  description: string;
+  price: string;
+  course: string;
+}
+
 export default function App() {
-  const [menuItems, setMenuItems] = useState([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [screen, setScreen] = useState('welcome');
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     password: '',
@@ -23,14 +41,14 @@ export default function App() {
     course: 'Starters'
   });
 
-  // Part 2 Features
+  // Part 2: Add menu item function
   const addMenuItem = () => {
     if (!formData.dishName || !formData.description || !formData.price) {
       Alert.alert('Error', 'Please fill all fields');
       return;
     }
 
-    const newItem = {
+    const newItem: MenuItem = {
       id: Date.now().toString(),
       name: formData.dishName,
       description: formData.description,
@@ -143,17 +161,17 @@ export default function App() {
         
         <Text style={styles.label}>Course</Text>
         <View style={styles.courseContainer}>
-          {courses.map((course) => (
+          {courses.map((courseItem) => (
             <TouchableOpacity
-              key={course}
+              key={courseItem}
               style={[
                 styles.courseButton,
-                formData.course === course && styles.courseSelected
+                formData.course === courseItem && styles.courseSelected
               ]}
-              onPress={() => setFormData({...formData, course})}
+              onPress={() => setFormData({...formData, course: courseItem})}
             >
-              <Text style={formData.course === course ? styles.courseTextSelected : styles.courseText}>
-                {course}
+              <Text style={formData.course === courseItem ? styles.courseTextSelected : styles.courseText}>
+                {courseItem}
               </Text>
             </TouchableOpacity>
           ))}
