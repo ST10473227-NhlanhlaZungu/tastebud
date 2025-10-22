@@ -29,7 +29,7 @@ interface FormData {
 }
 
 export default function App() {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [menuItems, setMenuItems] = useState([]);
   const [screen, setScreen] = useState('welcome');
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -48,7 +48,7 @@ export default function App() {
       return;
     }
 
-    const newItem: MenuItem = {
+    const newItem = {
       id: Date.now().toString(),
       name: formData.dishName,
       description: formData.description,
