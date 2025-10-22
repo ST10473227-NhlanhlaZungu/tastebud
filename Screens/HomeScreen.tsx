@@ -16,7 +16,7 @@ interface MenuItem {
   price: number;
 }
 
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   const addMenuItem = () => {
